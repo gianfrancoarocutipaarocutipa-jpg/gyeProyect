@@ -187,8 +187,7 @@ async function startSimulatorScan() {
     const pidData = await pidRes.json()
     rawHex = pidData.data?.hex ?? ''
   } catch {
-    error.value = 'Error al leer trama OBD del simulador.'
-    return
+    // No fatal: los DTCs se obtienen del dashboard en el paso 3
   }
   lastRawHex.value = rawHex
 
