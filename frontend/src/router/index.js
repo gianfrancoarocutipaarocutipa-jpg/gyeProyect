@@ -24,14 +24,12 @@ const routes = [
       {
         path: 'ordenes/nueva',
         name: 'NuevaOrden',
-        component: () => import('@/views/OrdenDetalleView.vue'),
-        meta: { requiresAuth: true, roles: ['administrador', 'mecanico'] }
+        redirect: { name: 'Ordenes' }
       },
       {
         path: 'ordenes/:id',
         name: 'OrdenDetalle',
-        component: () => import('@/views/OrdenDetalleView.vue'),
-        meta: { requiresAuth: true }
+        redirect: { name: 'Ordenes' }
       },
       {
         path: 'clientes',

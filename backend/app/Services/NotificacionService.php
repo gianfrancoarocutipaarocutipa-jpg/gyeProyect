@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace GemMotors\Services;
 
-use GemMotors\Config\App;
-
 /**
  * Servicio de notificaciones para alertas de stock bajo y otros eventos
  * En un sistema real, esto podría integrarse con correo, SMS, o push notifications
@@ -23,19 +21,7 @@ class NotificacionService
         $mensaje = "ALERTA DE STOCK BAJO: El repuesto '{$nombreRepuesto}' tiene un stock de {$stockActual} unidades, " .
                   "que está por debajo o igual al mínimo permitido de {$stockMinimo} unidades.";
         
-        // Simular envío de correo electrónico al administrador
-        try {
-            // Simulamos la llamada a una función de envío de correo (ej. mail() o PHPMailer)
-            $to = "admin@gem-motors.com";
-            $subject = "Alerta de Stock Crítico: {$nombreRepuesto}";
-            
-            // Registramos el éxito del envío simulado
-            error_log("[" . date('Y-m-d H:i:s') . "] EMAIL ENVIADO a {$to}: {$subject} - {$mensaje}");
-            
-        } catch (\Exception $e) {
-            // En caso de fallo en el envío, registramos el error pero no detenemos el proceso (Flujo Alternativo 5a)
-            error_log("[" . date('Y-m-d H:i:s') . "] ERROR ENVIO EMAIL: " . $e->getMessage());
-        }
+        error_log("[" . date('Y-m-d H:i:s') . "] EMAIL ENVIADO a admin@gem-motors.com: Alerta de Stock Crítico: {$nombreRepuesto} - {$mensaje}");
         
         // También registramos la alerta en el log general del sistema
         error_log("[" . date('Y-m-d H:i:s') . "] NOTIFICACION: {$mensaje}");
@@ -173,17 +159,7 @@ class NotificacionService
     {
         $mensaje = "NUEVO USUARIO CREADO. Sus credenciales temporales son: Email='{$email}', Contraseña='{$passwordTemporal}'. Deberá cambiar su contraseña al iniciar sesión.";
         
-        // Simular envío de correo electrónico
-        try {
-            $to = $email;
-            $subject = "Bienvenido a G&E Motors - Credenciales de acceso";
-            
-            // Registramos el éxito del envío simulado
-            error_log("[" . date('Y-m-d H:i:s') . "] EMAIL ENVIADO a {$to}: {$subject} - {$mensaje}");
-        } catch (\Exception $e) {
-            error_log("[" . date('Y-m-d H:i:s') . "] ERROR ENVIO EMAIL: " . $e->getMessage());
-            return false;
-        }
+        error_log("[" . date('Y-m-d H:i:s') . "] EMAIL ENVIADO a {$email}: Bienvenido a G&E Motors - Credenciales de acceso - {$mensaje}");
         
         return true;
     }
@@ -217,17 +193,7 @@ class NotificacionService
 
         $mensaje = "Se adjunta el documento '{$nombreReporte}' correspondiente a la orden de trabajo {$orden->numero_ot}.";
         
-        // Simular envío de correo electrónico con adjunto
-        try {
-            $to = $cliente->email;
-            $subject = "G&E Motors - Su {$nombreReporte}";
-            
-            // Registramos el éxito del envío simulado
-            error_log("[" . date('Y-m-d H:i:s') . "] EMAIL ENVIADO a {$to}: {$subject} - {$mensaje} (PDF Adjunto: {$tipoPdf}_{$orden->numero_ot}.pdf)");
-        } catch (\Exception $e) {
-            error_log("[" . date('Y-m-d H:i:s') . "] ERROR ENVIO EMAIL: " . $e->getMessage());
-            return false;
-        }
+        error_log("[" . date('Y-m-d H:i:s') . "] EMAIL ENVIADO a {$cliente->email}: G&E Motors - Su {$nombreReporte} - {$mensaje} (PDF Adjunto: {$tipoPdf}_{$orden->numero_ot}.pdf)");
         
         return true;
     }

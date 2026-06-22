@@ -1,0 +1,1 @@
+import{c as t}from"./index-CFZFh9GV.js";const c={getAll(e={}){return t.get("/clientes",e)},create(e){return t.post("/clientes",e)},getById(e){return t.get(`/clientes/${e}`)},update(e,r){return t.put(`/clientes/${e}`,r)},getVehiculos(e){return t.get(`/clientes/${e}/vehiculos`)},getHistorial(e){return t.get(`/clientes/${e}/historial`)}};export{c};
