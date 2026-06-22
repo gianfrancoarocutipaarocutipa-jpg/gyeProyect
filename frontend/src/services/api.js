@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-const apiBase = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api'
+const apiBase = (import.meta.env.VITE_API_BASE || 'http://localhost:8000/api').replace(/\/$/, '')
 const cloudinaryUploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || null
 const cloudinaryCloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || null
 
