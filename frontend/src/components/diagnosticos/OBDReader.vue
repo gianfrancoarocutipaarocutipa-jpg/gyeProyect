@@ -169,9 +169,11 @@ async function fetchWithTimeout(url, timeoutMs = 5000) {
 }
 
 async function startSimulatorScan() {
+  const simulatorBase = import.meta.env.VITE_SIMULATOR_URL || 'http://localhost:8080'
+
   // PASO 1: Verificar disponibilidad del simulador
   try {
-    const healthRes = await fetchWithTimeout('http://localhost:8080/health')
+    const healthRes = await fetchWithTimeout(`${simulatorBase}/health`)
     if (!healthRes.ok) throw new Error()
   } catch {
     error.value = 'Simulador OBD no disponible. Verifica que esté corriendo en puerto 8080.'
@@ -181,7 +183,7 @@ async function startSimulatorScan() {
   // PASO 2: Obtener trama hex (se enviará al backend al guardar el diagnóstico)
   let rawHex = ''
   try {
-    const pidRes = await fetchWithTimeout('http://localhost:8080/pid?pid=03')
+    const pidRes = await fetchWithTimeout(`${simulatorBase}/pid?pid=03`)
     const pidData = await pidRes.json()
     rawHex = pidData.data?.hex ?? ''
   } catch {
@@ -192,7 +194,7 @@ async function startSimulatorScan() {
 
   // PASO 3: Obtener parámetros del motor y DTCs activos del dashboard
   try {
-    const dashRes = await fetchWithTimeout('http://localhost:8080/dashboard')
+    const dashRes = await fetchWithTimeout(`${simulatorBase}/dashboard`)
     const dash = await dashRes.json()
     dashboardData.value = dash
     kilometrajeSimulador.value = dash.data?.km_totales?.valor ?? null
