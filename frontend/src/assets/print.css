@@ -1,0 +1,170 @@
+@media print {
+  .screen-only {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-page-break {
+    page-break-after: always;
+  }
+
+  .print-avoid-break {
+    page-break-inside: avoid;
+  }
+
+  .print-text-sm {
+    font-size: 0.875rem !important;
+  }
+
+  .print-text-xs {
+    font-size: 0.75rem !important;
+  }
+
+  .print-mb-1 {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .print-mb-2 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .print-mb-4 {
+    margin-bottom: 1rem !important;
+  }
+
+  .print-p-2 {
+    padding: 0.5rem !important;
+  }
+
+  .print-p-4 {
+    padding: 1rem !important;
+  }
+
+  .print-border-b {
+    border-bottom: 1px solid #e5e7eb !important;
+  }
+
+  .print-border-t {
+    border-top: 1px solid #e5e7eb !important;
+  }
+
+  .print-border {
+    border: 1px solid #e5e7eb !important;
+  }
+
+  .print-rounded-none {
+    border-radius: 0 !important;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+.print-boleta {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.print-header {
+  text-align: center;
+  border-bottom: 2px solid #4f46e5;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.print-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4f46e5;
+  margin-bottom: 0.25rem;
+}
+
+.print-ruc {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.print-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.25rem;
+}
+
+.print-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.print-info-label {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.print-info-value {
+  color: #111827;
+}
+
+.print-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.print-table th {
+  background-color: #f3f4f6;
+  padding: 0.5rem;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid #e5e7eb;
+}
+
+.print-table td {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.print-total {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: right;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 2px solid #4f46e5;
+}
+
+.print-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.print-signature {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.print-signature-line {
+  border-top: 1px solid #374151;
+  width: 200px;
+  text-align: center;
+  padding-top: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.formato-boleta {
+  background: #f9fafb;
+  padding: 2rem;
+}
