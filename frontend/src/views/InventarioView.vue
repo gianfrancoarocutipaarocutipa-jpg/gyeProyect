@@ -1,7 +1,7 @@
-<template>
+﻿<template>
   <div class="p-6">
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold text-gray-900">Gestión de Inventario</h2>
+      <h2 class="text-2xl font-bold text-slate-100">Gestión de Inventario</h2>
       <div class="flex space-x-3">
         <BaseButton variant="primary" size="md" @click="openCreateModal" :loading="savingRepuesto">
           Nuevo Repuesto
@@ -19,7 +19,7 @@
       <input
         v-model="search"
         placeholder="Buscar por nombre, OEM o categoría..."
-        class="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        class="flex-1 px-3 py-2 border border-slate-600 rounded-md shadow-md shadow-black/10 focus:outline-none focus:ring-cyan-500/40 focus:border-cyan-500 sm:text-sm"
         @keyup.enter="fetchRepuestos"
       />
       <BaseButton variant="outline" size="md" @click="fetchRepuestos">Buscar</BaseButton>
@@ -45,30 +45,30 @@
 
     <BaseModal v-model:show="showCreateRepuestoModal" @close="resetRepuestoForm">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">{{ editingRepuesto ? 'Editar Repuesto' : 'Nuevo Repuesto' }}</h3>
+        <h3 class="text-lg font-medium text-slate-100">{{ editingRepuesto ? 'Editar Repuesto' : 'Nuevo Repuesto' }}</h3>
       </template>
       <div class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Código OEM</label>
+          <label class="block text-sm font-medium text-slate-300">Código OEM</label>
           <input v-model="repuestoForm.codigo_oem" @input="validateOEM" class="w-full px-3 py-2 border rounded-md" required />
           <p v-if="oemError" class="text-red-500 text-xs mt-1">{{ oemError }}</p>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">Nombre</label>
+          <label class="block text-sm font-medium text-slate-300">Nombre</label>
           <input v-model="repuestoForm.nombre" class="w-full px-3 py-2 border rounded-md" required />
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700">Stock Actual</label>
+            <label class="block text-sm font-medium text-slate-300">Stock Actual</label>
             <input type="number" v-model.number="repuestoForm.stock" class="w-full px-3 py-2 border rounded-md" min="0" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Stock Mínimo</label>
+            <label class="block text-sm font-medium text-slate-300">Stock Mínimo</label>
             <input type="number" v-model.number="repuestoForm.stock_minimo" class="w-full px-3 py-2 border rounded-md" min="0" />
           </div>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">Precio Unitario</label>
+          <label class="block text-sm font-medium text-slate-300">Precio Unitario</label>
           <input type="number" v-model.number="repuestoForm.precio_unitario" class="w-full px-3 py-2 border rounded-md" step="0.01" />
         </div>
       </div>
@@ -79,7 +79,7 @@
     </BaseModal>
 
     <BaseModal v-model:show="showRepuestoDetailModal" @close="resetRepuestoDetail">
-      <template #header><h3 class="text-lg font-medium text-gray-900">Detalle del Repuesto</h3></template>
+      <template #header><h3 class="text-lg font-medium text-slate-100">Detalle del Repuesto</h3></template>
       <div v-if="selectedRepuesto" class="space-y-2">
         <p><strong>OEM:</strong> {{ selectedRepuesto.codigo_oem }}</p>
         <p><strong>Nombre:</strong> {{ selectedRepuesto.nombre }}</p>

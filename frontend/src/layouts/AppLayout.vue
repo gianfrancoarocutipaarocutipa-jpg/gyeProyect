@@ -1,10 +1,10 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-gray-50">
+  <div class="min-h-screen flex flex-col bg-slate-950">
     <AppTopbar />
     <div class="flex-1 overflow-hidden">
       <div class="flex h-full">
-        <AppSidebar class="flex-shrink-0 border-r border-gray-200" />
-        <div class="flex-1 overflow-y-auto bg-white">
+        <AppSidebar class="flex-shrink-0" />
+        <div class="flex-1 overflow-y-auto bg-slate-950">
           <router-view />
         </div>
       </div>

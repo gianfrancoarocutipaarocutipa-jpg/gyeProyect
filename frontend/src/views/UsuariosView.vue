@@ -1,7 +1,7 @@
-<template>
+﻿<template>
   <div class="p-6">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-gray-900">Gestión de Usuarios</h2>
+      <h2 class="text-2xl font-bold text-slate-100">Gestión de Usuarios</h2>
       <BaseButton variant="primary" @click="abrirModalUsuario()">
         Nuevo Usuario
       </BaseButton>
@@ -20,21 +20,21 @@
     </div>
 
     <div v-else-if="!listLoading && (!usuarios || usuarios.length === 0)" class="text-center py-12">
-      <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <svg class="mx-auto h-12 w-12 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <p class="mt-4 text-lg text-gray-500">No hay usuarios registrados</p>
-      <p class="mt-2 text-sm text-gray-400">Haz clic en "Nuevo Usuario" para comenzar</p>
+      <p class="mt-4 text-lg text-slate-400">No hay usuarios registrados</p>
+      <p class="mt-2 text-sm text-slate-500">Haz clic en "Nuevo Usuario" para comenzar</p>
     </div>
 
-    <div v-else class="bg-white shadow rounded-lg overflow-hidden">
+    <div v-else class="bg-slate-800/60 shadow rounded-lg overflow-hidden">
       <BaseTable :columns="usuariosColumns" :data="usuarios">
         <template #actions="{ row }">
           <div class="flex space-x-2">
-            <button @click="abrirModalUsuario(row)" class="text-indigo-600 hover:text-indigo-900">
+            <button @click="abrirModalUsuario(row)" class="text-cyan-400 hover:text-cyan-200">
               Editar
             </button>
-            <button @click="confirmarToggleEstado(row)" class="text-gray-600 hover:text-gray-900">
+            <button @click="confirmarToggleEstado(row)" class="text-slate-400 hover:text-slate-100">
               {{ row.activo ? 'Desactivar' : 'Activar' }}
             </button>
           </div>

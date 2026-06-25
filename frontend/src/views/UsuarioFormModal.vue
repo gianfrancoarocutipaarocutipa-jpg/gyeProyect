@@ -1,7 +1,7 @@
-<template>
+﻿<template>
   <BaseModal :show="show" @update:show="$emit('update:show', $event)" @close="handleClose">
     <template #header>
-      <h3 class="text-lg font-medium text-gray-900">
+      <h3 class="text-lg font-medium text-slate-100">
         {{ usuario ? 'Editar Usuario' : 'Nuevo Usuario' }}
       </h3>
     </template>
@@ -9,17 +9,17 @@
     <form @submit.prevent="handleSubmit" class="space-y-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Nombre</label>
+          <label class="block text-sm font-medium text-slate-300">Nombre</label>
           <input v-model="form.nombre" type="text" class="w-full px-3 py-2 border rounded-md" required />
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">Apellido</label>
+          <label class="block text-sm font-medium text-slate-300">Apellido</label>
           <input v-model="form.apellido" type="text" class="w-full px-3 py-2 border rounded-md" required />
         </div>
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+        <label class="block text-sm font-medium text-slate-300">Correo Electrónico</label>
         <input v-model="form.email" type="email" class="w-full px-3 py-2 border rounded-md" required :disabled="!!usuario" />
       </div>
 
@@ -28,7 +28,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700">Rol del Sistema</label>
+        <label class="block text-sm font-medium text-slate-300">Rol del Sistema</label>
         <select v-model="form.rol" class="w-full px-3 py-2 border rounded-md" required>
           <option value="">Seleccione un rol...</option>
           <option value="mecanico">Mecánico</option>
@@ -37,8 +37,8 @@
       </div>
 
       <div v-if="usuario" class="flex items-center space-x-2 pt-2">
-        <input type="checkbox" v-model="form.activo" id="user-active" class="rounded text-indigo-600" />
-        <label for="user-active" class="text-sm text-gray-700">Usuario Activo</label>
+        <input type="checkbox" v-model="form.activo" id="user-active" class="rounded text-cyan-400" />
+        <label for="user-active" class="text-sm text-slate-300">Usuario Activo</label>
       </div>
     </form>
 

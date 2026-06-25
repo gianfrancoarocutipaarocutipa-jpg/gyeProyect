@@ -1,28 +1,28 @@
-<template>
+﻿<template>
   <BaseModal :show="show" @close="$emit('update:show', false)">
     <template #header>
-      <h3 class="text-lg font-medium text-gray-900">
+      <h3 class="text-lg font-medium text-slate-100">
         Historial de Consumo: {{ repuesto?.nombre }}
       </h3>
     </template>
 
     <div v-if="loading" class="text-center py-6">Cargando historial...</div>
     
-    <div v-else-if="historial.length === 0" class="text-center py-6 text-gray-500">
+    <div v-else-if="historial.length === 0" class="text-center py-6 text-slate-400">
       Este repuesto no ha sido utilizado en ninguna orden de trabajo.
     </div>
 
     <div v-else class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
-      <div v-for="h in historial" :key="h.orden_id + '_' + h.fecha_asignacion" class="border rounded-lg p-4 bg-gray-50 flex justify-between items-center relative overflow-hidden">
+      <div v-for="h in historial" :key="h.orden_id + '_' + h.fecha_asignacion" class="border rounded-lg p-4 bg-slate-800/40 flex justify-between items-center relative overflow-hidden">
         <div class="absolute left-0 top-0 bottom-0 w-1 bg-green-500"></div>
         <div>
-          <div class="font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded inline-block mb-1">OT #{{ h.numero_ot }}</div>
-          <div class="text-xs text-gray-500">{{ formatDate(h.fecha_asignacion) }}</div>
-          <div class="text-xs text-gray-600 mt-1">Estado OT: {{ formatEstado(h.estado) }}</div>
+          <div class="font-bold text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded inline-block mb-1">OT #{{ h.numero_ot }}</div>
+          <div class="text-xs text-slate-400">{{ formatDate(h.fecha_asignacion) }}</div>
+          <div class="text-xs text-slate-400 mt-1">Estado OT: {{ formatEstado(h.estado) }}</div>
         </div>
         <div class="text-right">
-          <div class="text-sm font-medium text-gray-700">Cantidad usada</div>
-          <div class="text-xl font-bold text-gray-900">{{ h.cantidad }} und.</div>
+          <div class="text-sm font-medium text-slate-300">Cantidad usada</div>
+          <div class="text-xl font-bold text-slate-100">{{ h.cantidad }} und.</div>
         </div>
       </div>
     </div>

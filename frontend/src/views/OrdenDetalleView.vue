@@ -1,9 +1,9 @@
-<template>
+﻿<template>
   <div class="p-6">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-gray-900">Expediente OT #{{ orden?.numero_ot }}</h2>
+      <h2 class="text-2xl font-bold text-slate-100">Expediente OT #{{ orden?.numero_ot }}</h2>
       <div class="flex items-center space-x-2">
-        <select v-model="pdfType" class="border-gray-300 rounded-md shadow-sm text-sm focus:ring-blue-500 focus:border-blue-500">
+        <select v-model="pdfType" class="border-slate-600 rounded-md shadow-md shadow-black/10 text-sm focus:ring-blue-500 focus:border-blue-500">
           <option value="">Generar Reporte...</option>
           <option value="diagnostico">Diagnóstico OBD-II</option>
           <option value="hoja_ruta">Hoja de Ruta</option>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="lg:col-span-2 space-y-6">
-        <div class="bg-white rounded-lg shadow p-4">
+        <div class="bg-slate-800/60 rounded-lg shadow p-4">
           <h3 class="font-bold mb-3">Estado del Proceso</h3>
           <OrdenEstadoPipeline :estado-actual="orden.estado" :ot-id="orden.id" @transicion-estado="abrirTransicion" />
         </div>
@@ -42,7 +42,7 @@
           @delete="eliminarEvidencia" 
         />
 
-        <div class="bg-white rounded-lg shadow p-4">
+        <div class="bg-slate-800/60 rounded-lg shadow p-4">
           <div class="flex justify-between items-center mb-3">
             <h3 class="font-bold">Repuestos Asignados</h3>
             <BaseButton v-if="!estadoBloqueado" size="sm" @click="showModalRep = true">Asignar</BaseButton>

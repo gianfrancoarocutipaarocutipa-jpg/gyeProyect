@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="formato-boleta">
     <div class="print-only">
       <div class="print-boleta">
@@ -6,7 +6,7 @@
         <div class="print-header">
           <div class="print-logo">G&amp;E Motors</div>
           <div class="print-ruc">RUC: 20123456789 - Tacna, Perú</div>
-          <div class="text-xs text-gray-600">Boleta de Servicio Técnico</div>
+          <div class="text-xs text-slate-400">Boleta de Servicio Técnico</div>
         </div>
 
         <!-- Order Info -->
@@ -46,7 +46,7 @@
         <!-- Problem Description -->
         <div class="print-mb-4">
           <div class="print-section-title">Descripción del Problema</div>
-          <p class="text-sm text-gray-800">{{ orden.descripcion_problema }}</p>
+          <p class="text-sm text-slate-200">{{ orden.descripcion_problema }}</p>
         </div>
 
         <!-- Parts Table -->

@@ -1,10 +1,10 @@
-<template>
+﻿<template>
   <div class="w-full">
     <div class="relative">
       <!-- Pipeline line -->
-      <div class="absolute top-5 left-0 right-0 h-1 bg-gray-200 rounded-full" aria-hidden="true">
+      <div class="absolute top-5 left-0 right-0 h-1 bg-slate-700 rounded-full" aria-hidden="true">
         <div
-          class="h-full bg-indigo-600 rounded-full transition-all duration-300"
+          class="h-full bg-cyan-600 rounded-full transition-all duration-300"
           :style="{ width: `${progressWidth}%` }"
         ></div>
       </div>
@@ -43,7 +43,7 @@
               <span>{{ index + 1 }}</span>
             </template>
           </button>
-          <span class="mt-2 text-xs font-medium text-gray-600 text-center max-w-[80px]">
+          <span class="mt-2 text-xs font-medium text-slate-400 text-center max-w-[80px]">
             {{ estado.label }}
           </span>
         </div>
@@ -67,15 +67,15 @@
     </div>
 
     <!-- Already completed state warning -->
-    <div v-if="estadoActualFinalizado" class="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-md">
+    <div v-if="estadoActualFinalizado" class="mt-4 p-3 bg-slate-800/40 border border-slate-700/50 rounded-md">
       <div class="flex">
         <div class="flex-shrink-0">
-          <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <svg class="h-5 w-5 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
         <div class="ml-3">
-          <p class="text-sm text-gray-600">
+          <p class="text-sm text-slate-400">
             La orden de trabajo ha finalizado. No se pueden realizar más transiciones de estado.
           </p>
         </div>
@@ -197,9 +197,9 @@ function estadoClasses(estado, index) {
     return 'bg-green-600 text-white ring-4 ring-green-200 cursor-pointer hover:bg-green-700 focus:ring-green-500'
   }
   if (estado.actual) {
-    return 'bg-indigo-600 text-white cursor-not-allowed'
+    return 'bg-cyan-600 text-white cursor-not-allowed'
   }
-  return 'bg-gray-300 text-gray-500 cursor-not-allowed'
+  return 'bg-gray-300 text-slate-400 cursor-not-allowed'
 }
 
 function emitirTransicion(nuevoEstado) {
