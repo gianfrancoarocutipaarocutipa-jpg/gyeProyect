@@ -1,10 +1,10 @@
 <template>
   <div class="p-6">
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold text-gray-900">
+      <h2 class="text-2xl font-bold text-slate-100">
         Lector OBD-II
       </h2>
-      <span class="text-sm text-gray-500">
+      <span class="text-sm text-slate-400">
         Escanea la ECU del vehículo para leer códigos de falla
       </span>
     </div>
@@ -19,7 +19,7 @@
         <option value="43 01 30 00">P0130 - Sensor Oxígeno (Banco 1, Sensor 1)</option>
         <option value="43 40 10 00">B0010 - Falla en Iluminación Interior</option>
         <option value="CUSTOM">Ingresar trama manual...</option>
-        <option value="SIMULATOR">🔌 Simulador OBD en vivo</option>
+        <option value="SIMULATOR">▸ Simulador OBD en vivo</option>
       </select>
       <input v-if="selectedScenario === 'CUSTOM'" v-model="customHex" type="text" placeholder="Ej: 43 01 03 00" class="mt-2 w-full px-3 py-2 border rounded-md text-mono" />
     </div>
@@ -27,42 +27,42 @@
     <!-- Estado de escaneo -->
     <div v-if="scanning" class="text-center py-8">
       <div class="flex items-center justify-center space-x-4">
-        <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-        <p class="text-indigo-600 font-medium">Leyendo datos de la ECU...</p>
+        <div class="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-cyan-400 font-medium">Leyendo datos de la ECU...</p>
       </div>
     </div>
 
     <div v-else>
       <!-- Panel de parámetros del motor (solo modo SIMULATOR) -->
-      <div v-if="dashboardData" class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-        <h3 class="text-sm font-semibold text-gray-700 mb-3">Parámetros del motor en tiempo real</h3>
+      <div v-if="dashboardData" class="mb-4 p-4 bg-slate-800/40 border border-slate-700/50 rounded-lg">
+        <h3 class="text-sm font-semibold text-slate-300 mb-3">Parámetros del motor en tiempo real</h3>
         <div class="grid grid-cols-3 gap-2 text-sm">
-          <div class="bg-white rounded p-2 border text-center">
-            <p class="text-xs text-gray-500">RPM</p>
-            <p class="font-bold text-indigo-600">{{ dashboardData.data?.rpm?.valor ?? '—' }}</p>
+          <div class="bg-slate-800/60 rounded p-2 border text-center">
+            <p class="text-xs text-slate-400">RPM</p>
+            <p class="font-bold text-cyan-400">{{ dashboardData.data?.rpm?.valor ?? '—' }}</p>
           </div>
-          <div class="bg-white rounded p-2 border text-center">
-            <p class="text-xs text-gray-500">Velocidad</p>
-            <p class="font-bold text-indigo-600">{{ dashboardData.data?.velocidad?.valor ?? '—' }} km/h</p>
+          <div class="bg-slate-800/60 rounded p-2 border text-center">
+            <p class="text-xs text-slate-400">Velocidad</p>
+            <p class="font-bold text-cyan-400">{{ dashboardData.data?.velocidad?.valor ?? '—' }} km/h</p>
           </div>
-          <div class="bg-white rounded p-2 border text-center">
-            <p class="text-xs text-gray-500">Temp. Ref.</p>
+          <div class="bg-slate-800/60 rounded p-2 border text-center">
+            <p class="text-xs text-slate-400">Temp. Ref.</p>
             <p class="font-bold text-orange-500">{{ dashboardData.data?.temp?.valor ?? '—' }} °C</p>
           </div>
-          <div class="bg-white rounded p-2 border text-center">
-            <p class="text-xs text-gray-500">Carga motor</p>
-            <p class="font-bold text-gray-700">{{ dashboardData.data?.carga?.valor ?? '—' }} %</p>
+          <div class="bg-slate-800/60 rounded p-2 border text-center">
+            <p class="text-xs text-slate-400">Carga motor</p>
+            <p class="font-bold text-slate-300">{{ dashboardData.data?.carga?.valor ?? '—' }} %</p>
           </div>
-          <div class="bg-white rounded p-2 border text-center">
-            <p class="text-xs text-gray-500">Voltaje</p>
-            <p class="font-bold text-gray-700">{{ dashboardData.data?.voltaje?.valor ?? '—' }} V</p>
+          <div class="bg-slate-800/60 rounded p-2 border text-center">
+            <p class="text-xs text-slate-400">Voltaje</p>
+            <p class="font-bold text-slate-300">{{ dashboardData.data?.voltaje?.valor ?? '—' }} V</p>
           </div>
-          <div class="bg-white rounded p-2 border text-center">
-            <p class="text-xs text-gray-500">Km totales</p>
-            <p class="font-bold text-gray-700">{{ dashboardData.data?.km_totales?.valor ?? '—' }}</p>
+          <div class="bg-slate-800/60 rounded p-2 border text-center">
+            <p class="text-xs text-slate-400">Km totales</p>
+            <p class="font-bold text-slate-300">{{ dashboardData.data?.km_totales?.valor ?? '—' }}</p>
           </div>
         </div>
-        <p v-if="dashboardData.ciclo_conduccion" class="mt-2 text-xs text-gray-500 text-center">
+        <p v-if="dashboardData.ciclo_conduccion" class="mt-2 text-xs text-slate-400 text-center">
           Ciclo: <span class="font-medium capitalize">{{ dashboardData.ciclo_conduccion }}</span>
         </p>
       </div>
@@ -76,27 +76,27 @@
 
       <!-- Resultados -->
       <div v-else class="mt-6">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">
+        <h3 class="text-xl font-bold text-slate-100 mb-4">
           Códigos de Falla Detectados
         </h3>
         <div class="space-y-3">
           <div
             v-for="(dtc, index) in results"
             :key="index"
-            class="p-4 bg-white rounded-lg shadow-md border-l-4"
-            :class="{ 'border-indigo-500': dtc.tipo === 'P', 'border-blue-500': dtc.tipo === 'B', 'border-green-500': dtc.tipo === 'C', 'border-yellow-500': dtc.tipo === 'U' }"
+            class="p-4 bg-slate-800/60 rounded-lg shadow-lg shadow-black/20 border-l-4"
+            :class="{ 'border-cyan-500': dtc.tipo === 'P', 'border-blue-500': dtc.tipo === 'B', 'border-green-500': dtc.tipo === 'C', 'border-yellow-500': dtc.tipo === 'U' }"
           >
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-lg font-semibold text-indigo-600">
+                <p class="text-lg font-semibold text-cyan-400">
                   {{ dtc.codigo }}
                 </p>
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-slate-400">
                   {{ dtc.sistema || 'Sistema no especificado' }}
                 </p>
               </div>
               <div class="text-right">
-                <p class="text-sm font-medium text-gray-600">
+                <p class="text-sm font-medium text-slate-400">
                   Severidad
                 </p>
                 <p class="text-lg font-bold" :class="{
@@ -108,7 +108,7 @@
                 </p>
               </div>
             </div>
-            <p class="mt-3 text-base text-gray-700 leading-relaxed">
+            <p class="mt-3 text-base text-slate-300 leading-relaxed">
               {{ dtc.descripcion }}
             </p>
           </div>

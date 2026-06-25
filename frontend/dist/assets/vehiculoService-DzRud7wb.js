@@ -1,0 +1,1 @@
+import{b as t}from"./index-B1hINU5L.js";const o={getAll(e={}){return t.get("/vehiculos",e)},create(e){return t.post("/vehiculos",e)},getById(e){return t.get(`/vehiculos/${e}`)},update(e,r){return t.put(`/vehiculos/${e}`,r)},getDiagnosticos(e){return t.get(`/vehiculos/${e}/diagnosticos`)},getHistorial(e){return t.get(`/vehiculos/${e}/historial`)}};export{o as v};

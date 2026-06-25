@@ -1,7 +1,7 @@
-<template>
+﻿<template>
   <BaseModal :show="show" z-index="z-[60]" @update:show="$emit('update:show', $event)" @close="handleClose">
     <template #header>
-      <h3 class="text-lg font-medium text-gray-900">
+      <h3 class="text-lg font-medium text-slate-100">
         Cambiar Estado: {{ estadoActualLabel }} → {{ nuevoEstadoLabel }}
       </h3>
     </template>
@@ -28,21 +28,21 @@
 
       <!-- Confirmation message for normal transition -->
       <div v-if="!estadoSaltado" class="text-center py-4">
-        <p class="text-gray-600">
+        <p class="text-slate-400">
           ¿Confirma cambiar el estado de la OT #{{ otId }} a <strong>{{ nuevoEstadoLabel }}</strong>?
         </p>
       </div>
 
       <!-- Notes field for specific states -->
       <div v-if="mostrarCampoNotas && !estadoSaltado">
-        <label for="observaciones" class="block text-sm font-medium text-gray-700 mb-1">
+        <label for="observaciones" class="block text-sm font-medium text-slate-300 mb-1">
           {{ labelObservaciones }}
         </label>
         <textarea
           id="observaciones"
           rows="3"
           v-model="observaciones"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          class="w-full px-3 py-2 border border-slate-600 rounded-md shadow-md shadow-black/10 focus:outline-none focus:ring-cyan-500/40 focus:border-cyan-500 sm:text-sm"
           :placeholder="placeholderObservaciones"
         ></textarea>
       </div>

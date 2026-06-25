@@ -1,7 +1,7 @@
-<template>
-  <div class="p-6 shadow-md rounded-xl bg-white">
+﻿<template>
+  <div class="p-6 shadow-lg shadow-black/20 rounded-xl bg-slate-900">
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold text-gray-900">
+      <h2 class="text-2xl font-bold text-slate-100">
         Gestión de Clientes
       </h2>
       <BaseButton
@@ -24,19 +24,19 @@
 
     <!-- Skeleton Loader -->
     <div v-if="clientsLoading" class="space-y-4">
-      <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-      <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-      <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-      <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+      <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+      <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+      <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+      <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
     </div>
 
     <!-- Empty State -->
     <div v-else-if="!clientsLoading && clients.length === 0" class="text-center py-12">
-      <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <svg class="mx-auto h-12 w-12 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <p class="mt-4 text-lg text-gray-500">No hay clientes registrados</p>
-      <p class="mt-2 text-sm text-gray-400">Haz clic en "Nuevo Cliente" para comenzar</p>
+      <p class="mt-4 text-lg text-slate-400">No hay clientes registrados</p>
+      <p class="mt-2 text-sm text-slate-500">Haz clic en "Nuevo Cliente" para comenzar</p>
     </div>
 
     <!-- Data Table -->
@@ -54,58 +54,58 @@
       @close="resetClientForm"
     >
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">
+        <h3 class="text-lg font-medium text-slate-100">
           {{ editingClient ? 'Editar Cliente' : 'Nuevo Cliente' }}
         </h3>
       </template>
 
       <div class="space-y-4">
         <div>
-          <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">
+          <label for="nombre" class="block text-sm font-medium text-slate-300 mb-1">
             Nombre Completo
           </label>
           <input
             id="nombre"
             type="text"
             required
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="w-full px-3 py-2 border border-slate-600 rounded-md shadow-md shadow-black/10 focus:outline-none focus:ring-cyan-500/40 focus:border-cyan-500 sm:text-sm"
             v-model="clientForm.nombre"
           />
         </div>
 
         <div>
-          <label for="dni_ruc" class="block text-sm font-medium text-gray-700 mb-1">
+          <label for="dni_ruc" class="block text-sm font-medium text-slate-300 mb-1">
             DNI/RUC
           </label>
           <input
             id="dni_ruc"
             type="text"
             required
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="w-full px-3 py-2 border border-slate-600 rounded-md shadow-md shadow-black/10 focus:outline-none focus:ring-cyan-500/40 focus:border-cyan-500 sm:text-sm"
             v-model="clientForm.dni_ruc"
           />
         </div>
 
         <div>
-          <label for="telefono" class="block text-sm font-medium text-gray-700 mb-1">
+          <label for="telefono" class="block text-sm font-medium text-slate-300 mb-1">
             Teléfono
           </label>
           <input
             id="telefono"
             type="text"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="w-full px-3 py-2 border border-slate-600 rounded-md shadow-md shadow-black/10 focus:outline-none focus:ring-cyan-500/40 focus:border-cyan-500 sm:text-sm"
             v-model="clientForm.telefono"
           />
         </div>
 
         <div>
-          <label for="correo" class="block text-sm font-medium text-gray-700 mb-1">
+          <label for="correo" class="block text-sm font-medium text-slate-300 mb-1">
             Correo Electrónico
           </label>
           <input
             id="correo"
             type="email"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="w-full px-3 py-2 border border-slate-600 rounded-md shadow-md shadow-black/10 focus:outline-none focus:ring-cyan-500/40 focus:border-cyan-500 sm:text-sm"
             v-model="clientForm.correo"
           />
         </div>
@@ -135,7 +135,7 @@
       @close="resetClientDetail"
     >
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">
+        <h3 class="text-lg font-medium text-slate-100">
           Detalle del Cliente
         </h3>
       </template>
@@ -185,7 +185,7 @@
       @close="resetHistorial"
     >
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">
+        <h3 class="text-lg font-medium text-slate-100">
           Historial de Reparaciones: {{ historialCliente?.nombre || '' }}
         </h3>
       </template>
@@ -194,12 +194,12 @@
         <div v-if="historialLoading" class="text-center py-4">
           <!-- Skeleton Loader for Historial -->
           <div class="space-y-2">
-            <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-            <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-            <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+            <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+            <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+            <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
           </div>
         </div>
-        <div v-else-if="!historialLoading && (!historialCliente || !historialCliente.ordenes || historialCliente.ordenes.length === 0)" class="text-center py-4 text-gray-500">
+        <div v-else-if="!historialLoading && (!historialCliente || !historialCliente.ordenes || historialCliente.ordenes.length === 0)" class="text-center py-4 text-slate-400">
           Este cliente no tiene órdenes de trabajo registradas.
         </div>
         <div v-else>
@@ -297,7 +297,7 @@ const historialColumns = [
         control_calidad: { text: 'Control Calidad', color: 'bg-purple-100 text-purple-800' },
         entregado: { text: 'Entregado', color: 'bg-green-100 text-green-800' }
       }
-      const e = estados[value] || { text: value || 'Sin estado', color: 'bg-gray-100 text-gray-800' }
+      const e = estados[value] || { text: value || 'Sin estado', color: 'bg-slate-800/50 text-slate-200' }
       return `<span class="px-2 py-1 rounded-full text-xs font-semibold ${e.color}">${e.text}</span>`
     }
   },
@@ -306,7 +306,7 @@ const historialColumns = [
     label: 'Fecha Cierre',
     width: 'quarter',
     format: (value) => {
-      if (!value) return '<span class="text-gray-400">Pendiente</span>'
+      if (!value) return '<span class="text-slate-500">Pendiente</span>'
       const d = new Date(value.replace(' ', 'T'))
       return isNaN(d.getTime()) ? 'Fecha inválida' : d.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })
     }

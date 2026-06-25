@@ -1,1 +1,0 @@
-import{z as c,s as o}from"./index-CFZFh9GV.js";function f(s){const t=o(!1),r=o(null),a=o(null);return{loading:t,data:r,error:a,execute:async(...n)=>{t.value=!0,a.value=null;try{const e=await s(...n);return r.value=e,e}catch(e){throw a.value=e,c().addNotification({type:"error",message:e.message||"Error al cargar los datos",timeout:5e3}),e}finally{t.value=!1}}}}export{f as u};

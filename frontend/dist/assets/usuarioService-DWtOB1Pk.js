@@ -1,1 +1,0 @@
-import{c as e}from"./index-CFZFh9GV.js";const u={getAll:()=>e.get("/usuarios"),create:a=>e.post("/usuarios",a),update:(a,s)=>e.put(`/usuarios/${a}`,s),delete:a=>e.delete(`/usuarios/${a}`),perfil:()=>e.get("/auth/perfil"),getCargaMecanicos:()=>e.get("/usuarios/carga-mecanicos")};export{u};

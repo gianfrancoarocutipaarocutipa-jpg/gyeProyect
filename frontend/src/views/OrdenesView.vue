@@ -1,7 +1,7 @@
-<template>
-  <div class="p-6 shadow-md rounded-xl bg-white">
+﻿<template>
+  <div class="p-6 shadow-lg shadow-black/20 rounded-xl bg-slate-900">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-gray-900">
+      <h2 class="text-2xl font-bold text-slate-100">
         Gestión de Órdenes de Trabajo
       </h2>
       <BaseButton
@@ -24,31 +24,31 @@
 
     <!-- Skeleton Loader -->
     <div v-if="listLoading" class="space-y-4">
-      <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-      <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-      <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-      <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+      <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+      <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+      <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+      <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
     </div>
 
     <!-- Empty State -->
     <div v-else-if="!listLoading && (!ordenesData || ordenesData.length === 0)" class="text-center py-12">
-      <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <svg class="mx-auto h-12 w-12 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <p class="mt-4 text-lg text-gray-500">No hay órdenes de trabajo registradas</p>
-      <p class="mt-2 text-sm text-gray-400">Haz clic en "Nueva Orden" para comenzar</p>
+      <p class="mt-4 text-lg text-slate-400">No hay órdenes de trabajo registradas</p>
+      <p class="mt-2 text-sm text-slate-500">Haz clic en "Nueva Orden" para comenzar</p>
     </div>
 
     <!-- Vista Mecánico: Detalle Inline -->
     <div v-else-if="userRole === 'mecanico'">
-      <div v-if="otSeleccionada" class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+      <div v-if="otSeleccionada" class="bg-slate-800/60 rounded-xl border border-slate-700/50 p-6 shadow-sm">
         <div class="flex justify-between items-center mb-6">
-          <h3 class="text-xl font-bold text-gray-900">Detalle de Orden #{{ otSeleccionada?.numero_ot || '' }}</h3>
+          <h3 class="text-xl font-bold text-slate-100">Detalle de Orden #{{ otSeleccionada?.numero_ot || '' }}</h3>
         </div>
 
         <!-- Pipeline -->
         <div class="mb-6">
-          <h4 class="text-sm font-medium text-gray-700 mb-3">Estado actual del proceso</h4>
+          <h4 class="text-sm font-medium text-slate-300 mb-3">Estado actual del proceso</h4>
           <OrdenEstadoPipeline
             :estado-actual="otSeleccionada.estado"
             :presupuesto-aprobado="otSeleccionada.presupuesto_aprobado || false"
@@ -61,12 +61,12 @@
         <div class="space-y-4">
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <p class="text-sm font-medium text-gray-500">Cliente</p>
-              <p class="text-sm text-gray-900">{{ otSeleccionada.cliente?.nombre || 'N/A' }}</p>
+              <p class="text-sm font-medium text-slate-400">Cliente</p>
+              <p class="text-sm text-slate-100">{{ otSeleccionada.cliente?.nombre || 'N/A' }}</p>
             </div>
             <div>
-              <p class="text-sm font-medium text-gray-500">Vehículo</p>
-              <p class="text-sm text-gray-900">
+              <p class="text-sm font-medium text-slate-400">Vehículo</p>
+              <p class="text-sm text-slate-100">
                 {{ otSeleccionada.vehiculo ? `${otSeleccionada.vehiculo.marca} ${otSeleccionada.vehiculo.modelo} - ${otSeleccionada.vehiculo.placa}` : 'N/A' }}
               </p>
             </div>
@@ -74,47 +74,47 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <p class="text-sm font-medium text-gray-500">Fecha de ingreso</p>
-              <p class="text-sm text-gray-900">{{ formatDate(otSeleccionada.created_at) }}</p>
+              <p class="text-sm font-medium text-slate-400">Fecha de ingreso</p>
+              <p class="text-sm text-slate-100">{{ formatDate(otSeleccionada.created_at) }}</p>
             </div>
           </div>
 
           <!-- Mecánicos Asignados List -->
-          <div class="pt-4 border-t border-gray-200">
+          <div class="pt-4 border-t border-slate-700/50">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-gray-700">Mecánicos Asignados</h4>
+              <h4 class="text-sm font-medium text-slate-300">Mecánicos Asignados</h4>
             </div>
             <ul v-if="otSeleccionada.mecanicos_asignados && otSeleccionada.mecanicos_asignados.length > 0" class="space-y-2">
-              <li v-for="m in otSeleccionada.mecanicos_asignados" :key="m.asignacion_id" class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+              <li v-for="m in otSeleccionada.mecanicos_asignados" :key="m.asignacion_id" class="flex justify-between items-center bg-slate-800/40 p-2 rounded border border-slate-700/40">
                 <div>
-                  <span class="text-sm font-medium text-gray-800">{{ m.nombre }} {{ m.apellido }}</span>
+                  <span class="text-sm font-medium text-slate-200">{{ m.nombre }} {{ m.apellido }}</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <span class="text-xs text-gray-500">Horas:</span>
+                  <span class="text-xs text-slate-400">Horas:</span>
                   <template v-if="(authStore.user?.id === m.mecanico_id) && otSeleccionada.estado !== 'entregado'">
                     <input type="number" min="0" class="w-12 px-1 py-1 text-sm border rounded text-center"
                            :value="m.horas_int ?? Math.floor(m.horas_trabajadas)"
                            @change="m.horas_int = Math.max(0, parseInt($event.target.value) || 0)" placeholder="0" />
-                    <span class="text-xs text-gray-400">h</span>
+                    <span class="text-xs text-slate-500">h</span>
                     <input type="number" min="0" max="59" class="w-12 px-1 py-1 text-sm border rounded text-center"
                            :value="m.minutos_int ?? Math.round((m.horas_trabajadas % 1) * 60)"
                            @change="m.minutos_int = Math.min(59, Math.max(0, parseInt($event.target.value) || 0))" placeholder="0" />
-                    <span class="text-xs text-gray-400">min</span>
+                    <span class="text-xs text-slate-500">min</span>
                   </template>
-                  <span v-else class="text-sm font-medium text-gray-900">{{ formatHorasMinutos(m.horas_trabajadas) }}</span>
+                  <span v-else class="text-sm font-medium text-slate-100">{{ formatHorasMinutos(m.horas_trabajadas) }}</span>
                   <BaseButton v-if="(authStore.user?.id === m.mecanico_id) && otSeleccionada.estado !== 'entregado'"
                               variant="primary" size="sm" class="px-2 py-1 h-auto text-xs"
                               @click="guardarHorasMecanico(m)" :loading="m.saving">Guardar</BaseButton>
                 </div>
               </li>
             </ul>
-            <p v-else class="text-sm text-gray-500 italic">No hay mecánicos asignados a esta orden.</p>
+            <p v-else class="text-sm text-slate-400 italic">No hay mecánicos asignados a esta orden.</p>
           </div>
 
           <!-- Repuestos Asignados List -->
-          <div class="pt-4 border-t border-gray-200">
+          <div class="pt-4 border-t border-slate-700/50">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-gray-700">Repuestos Utilizados</h4>
+              <h4 class="text-sm font-medium text-slate-300">Repuestos Utilizados</h4>
               <BaseButton
                 v-if="otSeleccionada.estado === 'esperando_repuesto'"
                 variant="link" size="sm" class="p-0" @click="abrirAsignarRepuesto"
@@ -123,13 +123,13 @@
               </BaseButton>
             </div>
             <ul v-if="otSeleccionada.repuestos_asignados && otSeleccionada.repuestos_asignados.length > 0" class="space-y-2">
-              <li v-for="r in otSeleccionada.repuestos_asignados" :key="r.id" class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+              <li v-for="r in otSeleccionada.repuestos_asignados" :key="r.id" class="flex justify-between items-center bg-slate-800/40 p-2 rounded border border-slate-700/40">
                 <div class="flex items-center space-x-2">
-                  <span class="text-sm font-medium text-gray-800">{{ r.repuesto_nombre }}</span>
-                  <span class="text-xs text-gray-500">({{ r.codigo_oem }})</span>
+                  <span class="text-sm font-medium text-slate-200">{{ r.repuesto_nombre }}</span>
+                  <span class="text-xs text-slate-400">({{ r.codigo_oem }})</span>
                 </div>
                 <div class="flex items-center space-x-3">
-                  <span class="text-sm text-gray-600">Cant: {{ r.cantidad }}</span>
+                  <span class="text-sm text-slate-400">Cant: {{ r.cantidad }}</span>
                   <BaseButton v-if="otSeleccionada.estado === 'esperando_repuesto'"
                               variant="danger" size="sm" class="px-2 py-1 h-auto text-xs bg-red-100 text-red-700 border-red-200 hover:bg-red-200"
                               @click="eliminarRepuesto(r.repuesto_id)">
@@ -138,11 +138,11 @@
                 </div>
               </li>
             </ul>
-            <p v-else class="text-sm text-gray-500 italic">No hay repuestos asignados a esta orden.</p>
+            <p v-else class="text-sm text-slate-400 italic">No hay repuestos asignados a esta orden.</p>
           </div>
 
           <!-- Confirmar asignaciones (vista mecánico) -->
-          <div v-if="otSeleccionada.estado === 'esperando_repuesto'" class="pt-4 border-t border-gray-200">
+          <div v-if="otSeleccionada.estado === 'esperando_repuesto'" class="pt-4 border-t border-slate-700/50">
             <div v-if="otSeleccionada.mecanicos_asignados?.length > 0 && otSeleccionada.repuestos_asignados?.length > 0" class="p-3 bg-green-50 border border-green-200 rounded-md">
               <p class="text-sm text-green-700 mb-3">Mecánicos y repuestos asignados. Confirme para iniciar la reparación.</p>
               <BaseButton variant="primary" class="w-full" @click="confirmarInicioReparacion" :loading="transicionLoading">
@@ -155,9 +155,9 @@
           </div>
 
           <!-- Evidencias Multimedia List -->
-          <div class="pt-4 border-t border-gray-200">
+          <div class="pt-4 border-t border-slate-700/50">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-gray-700">Evidencia Multimedia</h4>
+              <h4 class="text-sm font-medium text-slate-300">Evidencia Multimedia</h4>
               <BaseButton
                 v-if="otSeleccionada.estado !== 'entregado'"
                 variant="link" size="sm" class="p-0" @click="abrirAñadirEvidencia"
@@ -166,7 +166,7 @@
               </BaseButton>
             </div>
             <div v-if="evidencias && evidencias.length > 0" class="grid grid-cols-2 gap-4">
-              <div v-for="e in evidencias" :key="e.id" class="bg-gray-50 rounded-lg p-3 border border-gray-100 flex flex-col relative group">
+              <div v-for="e in evidencias" :key="e.id" class="bg-slate-800/40 rounded-lg p-3 border border-slate-700/40 flex flex-col relative group">
                 <div v-if="otSeleccionada.estado !== 'entregado'" class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex gap-1">
                   <BaseButton variant="primary" size="sm" class="px-2 py-1 h-auto text-xs rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 border-blue-200 shadow-sm" 
                               @click="abrirEditarEvidencia(e)">
@@ -178,33 +178,33 @@
                   </BaseButton>
                 </div>
                 <div class="mb-2">
-                  <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800 uppercase tracking-wide">{{ e.etiqueta }}</span>
+                  <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-cyan-500/15 text-cyan-300 uppercase tracking-wide">{{ e.etiqueta }}</span>
                 </div>
                 <div class="flex-grow">
-                  <img v-if="e.tipo === 'foto' || e.tipo === 'imagen'" :src="e.url_cloudinary || e.url" class="w-full h-32 object-cover rounded shadow-sm mb-2 cursor-pointer hover:opacity-90" @click="window.open(e.url_cloudinary || e.url, '_blank')" title="Click para ampliar" />
-                  <video v-else :src="e.url_cloudinary || e.url" class="w-full h-32 object-cover rounded shadow-sm mb-2 cursor-pointer hover:opacity-90" @click="window.open(e.url_cloudinary || e.url, '_blank')" controls title="Click para ampliar"></video>
+                  <img v-if="e.tipo === 'foto' || e.tipo === 'imagen'" :src="e.url_cloudinary || e.url" class="w-full h-32 object-cover rounded shadow-md shadow-black/10 mb-2 cursor-pointer hover:opacity-90" @click="window.open(e.url_cloudinary || e.url, '_blank')" title="Click para ampliar" />
+                  <video v-else :src="e.url_cloudinary || e.url" class="w-full h-32 object-cover rounded shadow-md shadow-black/10 mb-2 cursor-pointer hover:opacity-90" @click="window.open(e.url_cloudinary || e.url, '_blank')" controls title="Click para ampliar"></video>
                 </div>
-                <p class="text-sm text-gray-600 mt-2 line-clamp-2" :title="e.descripcion">{{ e.descripcion }}</p>
+                <p class="text-sm text-slate-400 mt-2 line-clamp-2" :title="e.descripcion">{{ e.descripcion }}</p>
               </div>
             </div>
-            <p v-else class="text-sm text-gray-500 italic">No hay evidencias multimedia en esta orden.</p>
+            <p v-else class="text-sm text-slate-400 italic">No hay evidencias multimedia en esta orden.</p>
           </div>
         </div>
         
-        <div class="mt-8 pt-4 border-t border-gray-200 flex gap-2 overflow-x-auto" v-if="ordenes.length > 1">
-           <span class="text-sm text-gray-500 mr-2 flex items-center">Tus otras asignaciones:</span>
+        <div class="mt-8 pt-4 border-t border-slate-700/50 flex gap-2 overflow-x-auto" v-if="ordenes.length > 1">
+           <span class="text-sm text-slate-400 mr-2 flex items-center">Tus otras asignaciones:</span>
            <button v-for="o in ordenes" :key="o.id" @click="verDetalle(o)" 
-              :class="['px-3 py-1 rounded text-sm transition-colors border', o.id === otSeleccionada?.id ? 'bg-indigo-50 border-indigo-500 font-bold text-indigo-700' : 'bg-white hover:bg-gray-50']">
+              :class="['px-3 py-1 rounded text-sm transition-colors border', o.id === otSeleccionada?.id ? 'bg-cyan-500/10 border-cyan-500 font-bold text-cyan-300' : 'bg-slate-800/60 hover:bg-slate-800/40']">
               {{ o.numero_ot }}
            </button>
         </div>
       </div>
       <div v-else class="text-center py-12">
-        <svg class="mx-auto h-12 w-12 text-indigo-400 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <svg class="mx-auto h-12 w-12 text-cyan-400 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <p class="mt-4 text-gray-500">Cargando tu orden...</p>
+        <p class="mt-4 text-slate-400">Cargando tu orden...</p>
       </div>
     </div>
 
@@ -234,17 +234,17 @@
     <!-- Create Order Modal -->
     <BaseModal v-model:show="showCreateModal" @close="resetCreateForm">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">Nueva Orden de Trabajo</h3>
+        <h3 class="text-lg font-medium text-slate-100">Nueva Orden de Trabajo</h3>
       </template>
 
       <div class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Número de OT</label>
+          <label class="block text-sm font-medium text-slate-300">Número de OT</label>
           <input v-model="orderForm.numero_ot" type="text" class="w-full px-3 py-2 border rounded-md" placeholder="Ej: OT-1001" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700">Cliente</label>
+          <label class="block text-sm font-medium text-slate-300">Cliente</label>
           <select v-model="orderForm.cliente_id" class="w-full px-3 py-2 border rounded-md">
             <option value="">Seleccione un cliente...</option>
             <option v-for="c in clients" :key="c.id" :value="c.id">{{ c.nombre }}</option>
@@ -252,7 +252,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700">Vehículo</label>
+          <label class="block text-sm font-medium text-slate-300">Vehículo</label>
           <select v-model="orderForm.vehiculo_id" class="w-full px-3 py-2 border rounded-md" :disabled="!orderForm.cliente_id">
             <option value="">{{ orderForm.cliente_id ? 'Seleccione un vehículo...' : 'Primero seleccione un cliente' }}</option>
             <option v-for="v in clientVehicles" :key="v.id" :value="v.id">{{ v.marca }} {{ v.modelo }} ({{ v.placa }})</option>
@@ -260,7 +260,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700">Descripción del Problema</label>
+          <label class="block text-sm font-medium text-slate-300">Descripción del Problema</label>
           <textarea v-model="orderForm.descripcion_problema" rows="3" class="w-full px-3 py-2 border rounded-md" placeholder="Describa la falla reportada..."></textarea>
         </div>
 
@@ -285,7 +285,7 @@
     <!-- Detail Modal -->
     <BaseModal v-if="userRole !== 'mecanico'" v-model:show="showDetailModal" @close="resetDetail">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">
+        <h3 class="text-lg font-medium text-slate-100">
           Detalle de Orden #{{ otSeleccionada?.numero_ot || '' }}
         </h3>
       </template>
@@ -293,7 +293,7 @@
       <div v-if="otSeleccionada">
         <!-- Pipeline -->
         <div class="mb-6">
-          <h4 class="text-sm font-medium text-gray-700 mb-3">Estado actual del proceso</h4>
+          <h4 class="text-sm font-medium text-slate-300 mb-3">Estado actual del proceso</h4>
           <OrdenEstadoPipeline
             :estado-actual="otSeleccionada.estado"
             :presupuesto-aprobado="otSeleccionada.presupuesto_aprobado || false"
@@ -306,12 +306,12 @@
         <div class="space-y-4">
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <p class="text-sm font-medium text-gray-500">Cliente</p>
-              <p class="text-sm text-gray-900">{{ otSeleccionada.cliente?.nombre || 'N/A' }}</p>
+              <p class="text-sm font-medium text-slate-400">Cliente</p>
+              <p class="text-sm text-slate-100">{{ otSeleccionada.cliente?.nombre || 'N/A' }}</p>
             </div>
             <div>
-              <p class="text-sm font-medium text-gray-500">Vehículo</p>
-              <p class="text-sm text-gray-900">
+              <p class="text-sm font-medium text-slate-400">Vehículo</p>
+              <p class="text-sm text-slate-100">
                 {{ otSeleccionada.vehiculo ? `${otSeleccionada.vehiculo.marca} ${otSeleccionada.vehiculo.modelo} - ${otSeleccionada.vehiculo.placa}` : 'N/A' }}
               </p>
             </div>
@@ -319,16 +319,16 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <p class="text-sm font-medium text-gray-500">Fecha de ingreso</p>
-              <p class="text-sm text-gray-900">{{ formatDate(otSeleccionada.created_at) }}</p>
+              <p class="text-sm font-medium text-slate-400">Fecha de ingreso</p>
+              <p class="text-sm text-slate-100">{{ formatDate(otSeleccionada.created_at) }}</p>
             </div>
             <!-- El botón de Asignar ahora se movió al título de Mecánicos Asignados -->
           </div>
 
           <!-- Mecánicos Asignados List -->
-          <div class="pt-4 border-t border-gray-200">
+          <div class="pt-4 border-t border-slate-700/50">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-gray-700">Mecánicos Asignados</h4>
+              <h4 class="text-sm font-medium text-slate-300">Mecánicos Asignados</h4>
               <BaseButton
                 v-if="userRole === 'administrador' && otSeleccionada.estado === 'esperando_repuesto'"
                 variant="link" size="sm" class="p-0" @click="abrirAsignarMecanico"
@@ -337,36 +337,36 @@
               </BaseButton>
             </div>
             <ul v-if="otSeleccionada.mecanicos_asignados && otSeleccionada.mecanicos_asignados.length > 0" class="space-y-2">
-              <li v-for="m in otSeleccionada.mecanicos_asignados" :key="m.asignacion_id" class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+              <li v-for="m in otSeleccionada.mecanicos_asignados" :key="m.asignacion_id" class="flex justify-between items-center bg-slate-800/40 p-2 rounded border border-slate-700/40">
                 <div>
-                  <span class="text-sm font-medium text-gray-800">{{ m.nombre }} {{ m.apellido }}</span>
+                  <span class="text-sm font-medium text-slate-200">{{ m.nombre }} {{ m.apellido }}</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <span class="text-xs text-gray-500">Horas:</span>
+                  <span class="text-xs text-slate-400">Horas:</span>
                   <template v-if="(userRole === 'administrador' || authStore.user?.id === m.mecanico_id) && otSeleccionada.estado !== 'entregado'">
                     <input type="number" min="0" class="w-12 px-1 py-1 text-sm border rounded text-center"
                            :value="m.horas_int ?? Math.floor(m.horas_trabajadas)"
                            @change="m.horas_int = Math.max(0, parseInt($event.target.value) || 0)" placeholder="0" />
-                    <span class="text-xs text-gray-400">h</span>
+                    <span class="text-xs text-slate-500">h</span>
                     <input type="number" min="0" max="59" class="w-12 px-1 py-1 text-sm border rounded text-center"
                            :value="m.minutos_int ?? Math.round((m.horas_trabajadas % 1) * 60)"
                            @change="m.minutos_int = Math.min(59, Math.max(0, parseInt($event.target.value) || 0))" placeholder="0" />
-                    <span class="text-xs text-gray-400">min</span>
+                    <span class="text-xs text-slate-500">min</span>
                   </template>
-                  <span v-else class="text-sm font-medium text-gray-900">{{ formatHorasMinutos(m.horas_trabajadas) }}</span>
+                  <span v-else class="text-sm font-medium text-slate-100">{{ formatHorasMinutos(m.horas_trabajadas) }}</span>
                   <BaseButton v-if="(userRole === 'administrador' || authStore.user?.id === m.mecanico_id) && otSeleccionada.estado !== 'entregado'"
                               variant="primary" size="sm" class="px-2 py-1 h-auto text-xs"
                               @click="guardarHorasMecanico(m)" :loading="m.saving">Guardar</BaseButton>
                 </div>
               </li>
             </ul>
-            <p v-else class="text-sm text-gray-500 italic">No hay mecánicos asignados a esta orden.</p>
+            <p v-else class="text-sm text-slate-400 italic">No hay mecánicos asignados a esta orden.</p>
           </div>
 
           <!-- Repuestos Asignados List -->
-          <div class="pt-4 border-t border-gray-200">
+          <div class="pt-4 border-t border-slate-700/50">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-gray-700">Repuestos Utilizados</h4>
+              <h4 class="text-sm font-medium text-slate-300">Repuestos Utilizados</h4>
               <BaseButton
                 v-if="(userRole === 'administrador' || userRole === 'mecanico') && otSeleccionada.estado === 'esperando_repuesto'"
                 variant="link" size="sm" class="p-0" @click="abrirAsignarRepuesto"
@@ -375,13 +375,13 @@
               </BaseButton>
             </div>
             <ul v-if="otSeleccionada.repuestos_asignados && otSeleccionada.repuestos_asignados.length > 0" class="space-y-2">
-              <li v-for="r in otSeleccionada.repuestos_asignados" :key="r.id" class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+              <li v-for="r in otSeleccionada.repuestos_asignados" :key="r.id" class="flex justify-between items-center bg-slate-800/40 p-2 rounded border border-slate-700/40">
                 <div class="flex items-center space-x-2">
-                  <span class="text-sm font-medium text-gray-800">{{ r.repuesto_nombre }}</span>
-                  <span class="text-xs text-gray-500">({{ r.codigo_oem }})</span>
+                  <span class="text-sm font-medium text-slate-200">{{ r.repuesto_nombre }}</span>
+                  <span class="text-xs text-slate-400">({{ r.codigo_oem }})</span>
                 </div>
                 <div class="flex items-center space-x-3">
-                  <span class="text-sm text-gray-600">Cant: {{ r.cantidad }}</span>
+                  <span class="text-sm text-slate-400">Cant: {{ r.cantidad }}</span>
                   <BaseButton v-if="(userRole === 'administrador' || userRole === 'mecanico') && otSeleccionada.estado === 'esperando_repuesto'"
                               variant="danger" size="sm" class="px-2 py-1 h-auto text-xs bg-red-100 text-red-700 border-red-200 hover:bg-red-200"
                               @click="eliminarRepuesto(r.repuesto_id)">
@@ -390,11 +390,11 @@
                 </div>
               </li>
             </ul>
-            <p v-else class="text-sm text-gray-500 italic">No hay repuestos asignados a esta orden.</p>
+            <p v-else class="text-sm text-slate-400 italic">No hay repuestos asignados a esta orden.</p>
           </div>
 
           <!-- Confirmar asignaciones (modal admin) -->
-          <div v-if="otSeleccionada.estado === 'esperando_repuesto'" class="pt-4 border-t border-gray-200">
+          <div v-if="otSeleccionada.estado === 'esperando_repuesto'" class="pt-4 border-t border-slate-700/50">
             <div v-if="otSeleccionada.mecanicos_asignados?.length > 0 && otSeleccionada.repuestos_asignados?.length > 0" class="p-3 bg-green-50 border border-green-200 rounded-md">
               <p class="text-sm text-green-700 mb-3">Mecánicos y repuestos asignados. Confirme para iniciar la reparación.</p>
               <BaseButton variant="primary" class="w-full" @click="confirmarInicioReparacion" :loading="transicionLoading">
@@ -407,9 +407,9 @@
           </div>
 
           <!-- Evidencias Multimedia List (Admin) -->
-          <div class="pt-4 border-t border-gray-200">
+          <div class="pt-4 border-t border-slate-700/50">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-gray-700">Evidencia Multimedia</h4>
+              <h4 class="text-sm font-medium text-slate-300">Evidencia Multimedia</h4>
               <BaseButton 
                 v-if="(userRole === 'administrador' || userRole === 'mecanico') && otSeleccionada.estado !== 'entregado'" 
                 variant="link" size="sm" class="p-0" @click="abrirAñadirEvidencia"
@@ -418,7 +418,7 @@
               </BaseButton>
             </div>
             <div v-if="evidencias && evidencias.length > 0" class="grid grid-cols-2 gap-4">
-              <div v-for="e in evidencias" :key="e.id" class="bg-gray-50 rounded-lg p-3 border border-gray-100 flex flex-col relative group">
+              <div v-for="e in evidencias" :key="e.id" class="bg-slate-800/40 rounded-lg p-3 border border-slate-700/40 flex flex-col relative group">
                 <div v-if="(userRole === 'administrador' || userRole === 'mecanico') && otSeleccionada.estado !== 'entregado'" class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex gap-1">
                   <BaseButton variant="primary" size="sm" class="px-2 py-1 h-auto text-xs rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 border-blue-200 shadow-sm" 
                               @click="abrirEditarEvidencia(e)">
@@ -430,22 +430,22 @@
                   </BaseButton>
                 </div>
                 <div class="mb-2">
-                  <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800 uppercase tracking-wide">{{ e.etiqueta }}</span>
+                  <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-cyan-500/15 text-cyan-300 uppercase tracking-wide">{{ e.etiqueta }}</span>
                 </div>
                 <div class="flex-grow">
-                  <img v-if="e.tipo === 'foto' || e.tipo === 'imagen'" :src="e.url_cloudinary || e.url" class="w-full h-32 object-cover rounded shadow-sm mb-2 cursor-pointer hover:opacity-90" @click="window.open(e.url_cloudinary || e.url, '_blank')" title="Click para ampliar" />
-                  <video v-else :src="e.url_cloudinary || e.url" class="w-full h-32 object-cover rounded shadow-sm mb-2 cursor-pointer hover:opacity-90" @click="window.open(e.url_cloudinary || e.url, '_blank')" controls title="Click para ampliar"></video>
+                  <img v-if="e.tipo === 'foto' || e.tipo === 'imagen'" :src="e.url_cloudinary || e.url" class="w-full h-32 object-cover rounded shadow-md shadow-black/10 mb-2 cursor-pointer hover:opacity-90" @click="window.open(e.url_cloudinary || e.url, '_blank')" title="Click para ampliar" />
+                  <video v-else :src="e.url_cloudinary || e.url" class="w-full h-32 object-cover rounded shadow-md shadow-black/10 mb-2 cursor-pointer hover:opacity-90" @click="window.open(e.url_cloudinary || e.url, '_blank')" controls title="Click para ampliar"></video>
                 </div>
-                <p class="text-sm text-gray-600 mt-2 line-clamp-2" :title="e.descripcion">{{ e.descripcion }}</p>
+                <p class="text-sm text-slate-400 mt-2 line-clamp-2" :title="e.descripcion">{{ e.descripcion }}</p>
               </div>
             </div>
-            <p v-else class="text-sm text-gray-500 italic">No hay evidencias multimedia en esta orden.</p>
+            <p v-else class="text-sm text-slate-400 italic">No hay evidencias multimedia en esta orden.</p>
           </div>
 
           <!-- Budget status -->
-          <div v-if="otSeleccionada.presupuesto_id" class="pt-4 border-t border-gray-200">
+          <div v-if="otSeleccionada.presupuesto_id" class="pt-4 border-t border-slate-700/50">
             <div class="flex items-center justify-between">
-              <p class="text-sm font-medium text-gray-500">Presupuesto</p>
+              <p class="text-sm font-medium text-slate-400">Presupuesto</p>
               <span :class="[
                 'inline-flex px-2 py-1 text-xs font-semibold rounded-full',
                 presupuestoAprobado ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
@@ -463,7 +463,7 @@
             v-if="otSeleccionada?.cliente?.codigo_seguimiento"
             variant="outline"
             size="md"
-            class="text-indigo-600 border-indigo-600 hover:bg-indigo-50"
+            class="text-cyan-400 border-cyan-500 hover:bg-cyan-500/10"
             @click="copiarLinkSeguimiento(otSeleccionada.cliente.codigo_seguimiento)"
           >
             Copiar Link de Seguimiento
@@ -483,11 +483,11 @@
     <!-- Assign Mechanic Modal -->
     <BaseModal v-model:show="showAssignMecanicoModal" @close="showAssignMecanicoModal = false">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">Asignar Mecánico a OT #{{ otSeleccionada?.numero_ot }}</h3>
+        <h3 class="text-lg font-medium text-slate-100">Asignar Mecánico a OT #{{ otSeleccionada?.numero_ot }}</h3>
       </template>
       <div class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Seleccionar Mecánico</label>
+          <label class="block text-sm font-medium text-slate-300">Seleccionar Mecánico</label>
           <select v-model="mecanicoForm.mecanico_id" class="w-full px-3 py-2 border rounded-md">
             <option value="">Seleccione...</option>
             <option v-for="m in listaMecanicos" :key="m.id" :value="m.id">
@@ -496,15 +496,15 @@
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">Tiempo Estimado / Inicial</label>
+          <label class="block text-sm font-medium text-slate-300">Tiempo Estimado / Inicial</label>
           <div class="flex items-center gap-2">
             <div class="flex items-center gap-1 flex-1">
               <input v-model.number="mecanicoForm.horas_trabajadas" type="number" min="0" class="w-full px-3 py-2 border rounded-md" placeholder="0" />
-              <span class="text-sm text-gray-500 whitespace-nowrap">h</span>
+              <span class="text-sm text-slate-400 whitespace-nowrap">h</span>
             </div>
             <div class="flex items-center gap-1 flex-1">
               <input v-model.number="mecanicoForm.minutos_trabajados" type="number" min="0" max="59" class="w-full px-3 py-2 border rounded-md" placeholder="0" />
-              <span class="text-sm text-gray-500 whitespace-nowrap">min</span>
+              <span class="text-sm text-slate-400 whitespace-nowrap">min</span>
             </div>
           </div>
         </div>
@@ -525,20 +525,20 @@
     <!-- Assign Repuesto Modal -->
     <BaseModal v-model:show="showAssignRepuestoModal" @close="showAssignRepuestoModal = false">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">Añadir Repuesto a OT #{{ otSeleccionada?.numero_ot }}</h3>
+        <h3 class="text-lg font-medium text-slate-100">Añadir Repuesto a OT #{{ otSeleccionada?.numero_ot }}</h3>
       </template>
       <div class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Buscar y Seleccionar Repuesto</label>
+          <label class="block text-sm font-medium text-slate-300 mb-1">Buscar y Seleccionar Repuesto</label>
           <div class="relative mb-2">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-4 w-4 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
-            <input v-model="repuestoSearch" type="text" class="w-full pl-9 pr-3 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Buscar por nombre o código OEM..." />
+            <input v-model="repuestoSearch" type="text" class="w-full pl-9 pr-3 py-2 border rounded-md focus:ring-cyan-500/40 focus:border-cyan-500" placeholder="Buscar por nombre o código OEM..." />
           </div>
-          <select v-model="repuestoForm.repuesto_id" class="w-full px-3 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500" size="5">
+          <select v-model="repuestoForm.repuesto_id" class="w-full px-3 py-2 border rounded-md focus:ring-cyan-500/40 focus:border-cyan-500" size="5">
             <option value="" disabled>Seleccione un repuesto de la lista...</option>
             <option v-for="r in filteredRepuestos" :key="r.id" :value="r.id" :disabled="r.stock <= 0">
               {{ r.nombre }} - {{ r.codigo_oem }} (Stock: {{ r.stock }})
@@ -547,7 +547,7 @@
           <p v-if="filteredRepuestos.length === 0" class="text-xs text-amber-600 mt-1">No se encontraron repuestos con esa búsqueda.</p>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">Cantidad a utilizar</label>
+          <label class="block text-sm font-medium text-slate-300">Cantidad a utilizar</label>
           <input v-model.number="repuestoForm.cantidad" type="number" min="1" class="w-full px-3 py-2 border rounded-md" />
         </div>
       </div>
@@ -567,17 +567,17 @@
     <!-- Assign Evidencia Modal -->
     <BaseModal v-model:show="showAssignEvidenciaModal" @close="showAssignEvidenciaModal = false">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">Añadir Evidencia a OT #{{ otSeleccionada?.numero_ot }}</h3>
+        <h3 class="text-lg font-medium text-slate-100">Añadir Evidencia a OT #{{ otSeleccionada?.numero_ot }}</h3>
       </template>
       <div class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Archivo de Evidencia</label>
+          <label class="block text-sm font-medium text-slate-300 mb-1">Archivo de Evidencia</label>
           <div class="flex items-center justify-center w-full">
-            <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+            <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-600 rounded-lg cursor-pointer bg-slate-800/40 hover:bg-slate-800/50">
               <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg class="w-8 h-8 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click para subir</span> o arrastre un archivo</p>
-                <p class="text-xs text-gray-500">Imágenes (PNG, JPG) o Video (MP4)</p>
+                <svg class="w-8 h-8 mb-2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                <p class="mb-2 text-sm text-slate-400"><span class="font-semibold">Click para subir</span> o arrastre un archivo</p>
+                <p class="text-xs text-slate-400">Imágenes (PNG, JPG) o Video (MP4)</p>
               </div>
               <input type="file" accept="image/*,video/*" class="hidden" @change="handleFileChange" />
             </label>
@@ -585,16 +585,16 @@
           <p v-if="evidenciaForm.url_cloudinary" class="text-xs text-green-600 mt-2 font-medium">✓ Archivo cargado correctamente (Simulación activa)</p>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Etapa de la Reparación</label>
-          <select v-model="evidenciaForm.etiqueta" class="w-full px-3 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+          <label class="block text-sm font-medium text-slate-300 mb-1">Etapa de la Reparación</label>
+          <select v-model="evidenciaForm.etiqueta" class="w-full px-3 py-2 border rounded-md focus:ring-cyan-500/40 focus:border-cyan-500">
             <option value="antes">Antes de la reparación</option>
             <option value="durante">Durante la reparación</option>
             <option value="despues">Después de la reparación</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Descripción de lo reparado</label>
-          <textarea v-model="evidenciaForm.descripcion" rows="3" class="w-full px-3 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Indique qué problema ocurría o qué se reparó..."></textarea>
+          <label class="block text-sm font-medium text-slate-300 mb-1">Descripción de lo reparado</label>
+          <textarea v-model="evidenciaForm.descripcion" rows="3" class="w-full px-3 py-2 border rounded-md focus:ring-cyan-500/40 focus:border-cyan-500" placeholder="Indique qué problema ocurría o qué se reparó..."></textarea>
         </div>
       </div>
       <template #footer>
@@ -613,20 +613,20 @@
     <!-- Edit Evidencia Modal -->
     <BaseModal v-model:show="showEditEvidenciaModal" @close="showEditEvidenciaModal = false">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">Editar Evidencia</h3>
+        <h3 class="text-lg font-medium text-slate-100">Editar Evidencia</h3>
       </template>
       <div class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Etapa de la Reparación</label>
-          <select v-model="evidenciaEditForm.etiqueta" class="w-full px-3 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+          <label class="block text-sm font-medium text-slate-300 mb-1">Etapa de la Reparación</label>
+          <select v-model="evidenciaEditForm.etiqueta" class="w-full px-3 py-2 border rounded-md focus:ring-cyan-500/40 focus:border-cyan-500">
             <option value="antes">Antes de la reparación</option>
             <option value="durante">Durante la reparación</option>
             <option value="despues">Después de la reparación</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Descripción de lo reparado</label>
-          <textarea v-model="evidenciaEditForm.descripcion" rows="3" class="w-full px-3 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+          <label class="block text-sm font-medium text-slate-300 mb-1">Descripción de lo reparado</label>
+          <textarea v-model="evidenciaEditForm.descripcion" rows="3" class="w-full px-3 py-2 border rounded-md focus:ring-cyan-500/40 focus:border-cyan-500"></textarea>
         </div>
       </div>
       <template #footer>

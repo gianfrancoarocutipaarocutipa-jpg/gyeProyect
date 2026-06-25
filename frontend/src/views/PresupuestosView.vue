@@ -1,7 +1,7 @@
-<template>
+﻿<template>
   <div class="p-6">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-gray-900">Gestión de Presupuestos</h2>
+      <h2 class="text-2xl font-bold text-slate-100">Gestión de Presupuestos</h2>
     </div>
 
     <BaseAlert
@@ -27,7 +27,7 @@
 
     <BaseModal v-model:show="showDetailModal" @close="resetDetail">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">
+        <h3 class="text-lg font-medium text-slate-100">
           Detalle de Presupuesto #{{ presupuestoSeleccionado?.id || '' }}
         </h3>
       </template>
@@ -35,17 +35,17 @@
       <div v-if="presupuestoSeleccionado" class="space-y-4">
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <p class="text-sm font-medium text-gray-500">Orden de Trabajo</p>
-            <p class="text-sm text-gray-900">{{ presupuestoSeleccionado.numero_ot }}</p>
+            <p class="text-sm font-medium text-slate-400">Orden de Trabajo</p>
+            <p class="text-sm text-slate-100">{{ presupuestoSeleccionado.numero_ot }}</p>
           </div>
           <div>
-            <p class="text-sm font-medium text-gray-500">Total</p>
-            <p class="text-sm font-bold text-gray-900">S/ {{ formatCurrency(presupuestoSeleccionado.total) }}</p>
+            <p class="text-sm font-medium text-slate-400">Total</p>
+            <p class="text-sm font-bold text-slate-100">S/ {{ formatCurrency(presupuestoSeleccionado.total) }}</p>
           </div>
         </div>
 
         <div>
-          <p class="text-sm font-medium text-gray-500">Estado</p>
+          <p class="text-sm font-medium text-slate-400">Estado</p>
           <span :class="[
             'inline-flex px-2 py-1 text-xs font-semibold rounded-full',
             presupuestoSeleccionado.estado === 'aprobado' ? 'bg-green-100 text-green-800' : 
@@ -57,8 +57,8 @@
         </div>
 
         <div v-if="presupuestoSeleccionado.motivo_rechazo">
-          <p class="text-sm font-medium text-gray-500">Motivo de Rechazo</p>
-          <p class="text-sm text-gray-900">{{ presupuestoSeleccionado.motivo_rechazo }}</p>
+          <p class="text-sm font-medium text-slate-400">Motivo de Rechazo</p>
+          <p class="text-sm text-slate-100">{{ presupuestoSeleccionado.motivo_rechazo }}</p>
         </div>
 
         <div v-if="presupuestoSeleccionado.estado === 'pendiente'">
@@ -77,13 +77,13 @@
 
     <BaseModal v-model:show="showResponderModal" @close="resetResponder">
       <template #header>
-        <h3 class="text-lg font-medium text-gray-900">Responder Presupuesto</h3>
+        <h3 class="text-lg font-medium text-slate-100">Responder Presupuesto</h3>
       </template>
 
       <form @submit.prevent="responderPresupuesto" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Decisión</label>
-          <select v-model="respuesta.estado" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+          <label class="block text-sm font-medium text-slate-300 mb-2">Decisión</label>
+          <select v-model="respuesta.estado" class="w-full px-3 py-2 border border-slate-600 rounded-md" required>
             <option value="">Seleccionar...</option>
             <option value="aprobado">Aprobar</option>
             <option value="rechazado">Rechazar</option>
@@ -91,8 +91,8 @@
         </div>
 
         <div v-if="respuesta.estado === 'rechazado'">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Motivo de Rechazo</label>
-          <textarea v-model="respuesta.motivo_rechazo" class="w-full px-3 py-2 border border-gray-300 rounded-md" rows="3" required></textarea>
+          <label class="block text-sm font-medium text-slate-300 mb-2">Motivo de Rechazo</label>
+          <textarea v-model="respuesta.motivo_rechazo" class="w-full px-3 py-2 border border-slate-600 rounded-md" rows="3" required></textarea>
         </div>
       </form>
 

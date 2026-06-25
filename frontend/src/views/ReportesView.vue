@@ -1,15 +1,15 @@
-<template>
+﻿<template>
   <div class="p-6">
     <div class="mb-6">
-      <h2 class="text-2xl font-bold text-gray-900">Reportes del Taller</h2>
-      <p class="text-sm text-gray-600 mt-1">Análisis de ingresos, productividad y rotación</p>
+      <h2 class="text-2xl font-bold text-slate-100">Reportes del Taller</h2>
+      <p class="text-sm text-slate-400 mt-1">Análisis de ingresos, productividad y rotación</p>
     </div>
 
-    <nav class="flex space-x-4 mb-6 border-b border-gray-200">
+    <nav class="flex space-x-4 mb-6 border-b border-slate-700/50">
       <button
         v-for="tab in tabs" :key="tab.id"
         @click="switchTab(tab.id)"
-        :class="['px-4 py-2 text-sm font-medium border-b-2', activeTab === tab.id ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500']"
+        :class="['px-4 py-2 text-sm font-medium border-b-2', activeTab === tab.id ? 'border-cyan-500 text-cyan-400' : 'border-transparent text-slate-400']"
       >
         {{ tab.label }}
       </button>
@@ -18,7 +18,7 @@
     <div v-if="loading" class="text-center py-8">Cargando datos...</div>
 
     <div v-else class="space-y-6">
-      <div v-show="activeTab === 'ingresos'" class="bg-white rounded-lg shadow-md p-6">
+      <div v-show="activeTab === 'ingresos'" class="bg-slate-800/60 rounded-lg shadow-lg shadow-black/20 p-6">
         <div class="grid grid-cols-2 gap-4 mb-4">
           <input v-model="fechas.desde" type="date" class="px-3 py-2 border rounded-md" />
           <input v-model="fechas.hasta" type="date" class="px-3 py-2 border rounded-md" />
@@ -27,11 +27,11 @@
         <div v-if="reporteIngresos" class="mt-6 text-3xl font-bold">S/ {{ formatCurrency(reporteIngresos.total_ingresos) }}</div>
       </div>
 
-      <div v-show="activeTab === 'productividad'" class="bg-white rounded-lg shadow-md p-6">
+      <div v-show="activeTab === 'productividad'" class="bg-slate-800/60 rounded-lg shadow-lg shadow-black/20 p-6">
         <BaseTable :columns="productividadColumns" :data="reporteProductividad" />
       </div>
 
-      <div v-show="activeTab === 'rotacion'" class="bg-white rounded-lg shadow-md p-6">
+      <div v-show="activeTab === 'rotacion'" class="bg-slate-800/60 rounded-lg shadow-lg shadow-black/20 p-6">
         <BaseButton variant="primary" class="mb-4" @click="exportarInventario">Exportar CSV</BaseButton>
         <BaseTable :columns="rotacionColumns" :data="reporteRotacion" />
       </div>

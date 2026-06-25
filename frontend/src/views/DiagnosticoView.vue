@@ -1,22 +1,22 @@
-<template>
+﻿<template>
   <div class="p-6">
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold text-gray-900">
+      <h2 class="text-2xl font-bold text-slate-100">
         Registro de Diagnóstico
       </h2>
       <div class="flex flex-col items-end">
-        <span v-if="selectedOrder" class="text-sm font-bold text-indigo-600">
+        <span v-if="selectedOrder" class="text-sm font-bold text-cyan-400">
           Orden: {{ selectedOrder.numero_ot }}
         </span>
-        <span class="text-xs text-gray-500">
+        <span class="text-xs text-slate-400">
           ID Sistema: {{ otId || 'Sin seleccionar' }}
         </span>
       </div>
     </div>
 
     <!-- Selector de Orden si no viene por URL -->
-    <div v-if="!otId || otId === 'undefined'" class="mb-6 p-4 bg-white rounded-lg shadow border-l-4 border-indigo-500">
-      <label class="block text-sm font-medium text-gray-700 mb-2">Seleccione una Orden de Trabajo activa para diagnosticar</label>
+    <div v-if="!otId || otId === 'undefined'" class="mb-6 p-4 bg-slate-800/60 rounded-lg shadow border-l-4 border-cyan-500">
+      <label class="block text-sm font-medium text-slate-300 mb-2">Seleccione una Orden de Trabajo activa para diagnosticar</label>
       <select v-model="selectedOrderId" class="w-full px-3 py-2 border rounded-md" @change="handleOrderChange">
         <option value="">-- Seleccione una OT --</option>
         <option v-for="o in activeOrders" :key="o.id" :value="o.id">{{ o.numero_ot }} - {{ o.cliente?.nombre }}</option>
@@ -33,8 +33,8 @@
 
     <div v-if="diagnosticLoading" class="text-center py-8">
       <div class="flex items-center justify-center space-x-4">
-        <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-        <p class="text-indigo-600 font-medium">Procesando diagnóstico...</p>
+        <div class="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-cyan-400 font-medium">Procesando diagnóstico...</p>
       </div>
     </div>
 
@@ -45,40 +45,40 @@
 
       <form class="space-y-6" @submit.prevent="handleSubmit">
         <div>
-          <label for="kilometraje" class="block text-sm font-medium text-gray-700 mb-1">
+          <label for="kilometraje" class="block text-sm font-medium text-slate-300 mb-1">
             Kilometraje Actual (km)
           </label>
           <input
             id="kilometraje"
             type="number"
             required
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="w-full px-3 py-2 border border-slate-600 rounded-md shadow-md shadow-black/10 focus:outline-none focus:ring-cyan-500/40 focus:border-cyan-500 sm:text-sm"
             v-model.number="form.kilometraje"
             min="0"
           />
         </div>
 
         <div>
-          <label for="observaciones" class="block text-sm font-medium text-gray-700 mb-1">
+          <label for="observaciones" class="block text-sm font-medium text-slate-300 mb-1">
             Observaciones Técnicas
           </label>
           <textarea
             id="observaciones"
             rows="4"
             required
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="w-full px-3 py-2 border border-slate-600 rounded-md shadow-md shadow-black/10 focus:outline-none focus:ring-cyan-500/40 focus:border-cyan-500 sm:text-sm"
             v-model="form.observaciones"
             placeholder="Describa síntomas visuales, ruidos, olores u otros hallazgos..."
           ></textarea>
         </div>
 
         <div class="flex items-center justify-between">
-          <span class="text-sm text-gray-500">
+          <span class="text-sm text-slate-400">
             Códigos DTC detectados: {{ obdReaderResults.length }}
           </span>
           <button
             type="submit"
-            class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-cyan-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
             :disabled="saving || !form.kilometraje || !form.observaciones || !obdReaderRef?.hasRawHex"
           >
             {{ saving ? 'Guardando...' : 'Registrar Diagnóstico' }}
